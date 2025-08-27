@@ -9,6 +9,7 @@ import java.nio.file.Path;
 import java.util.List;
 
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+import org.example.service.StudentService;
 
 import java.io.FileOutputStream;
 
@@ -76,16 +77,28 @@ public class ExcelExporter {
             e.printStackTrace();
         }
     }
-    public static void exportAllStudents(List<StudentEntity> studentEntityList, Path outputPath){
+
+    private static void createFinalWorkbook(String name, List<StudentEntity> studentEntityList, Path outputPath){
         Workbook wb = createWorkbook();
-        Sheet sheet = createSheet(wb, "Students");
+        Sheet sheet = createSheet(wb, name);
         writeHeader(sheet);
-        writeRows(sheet, studentEntityList);
+        writeRows(sheet,studentEntityList);
         try {
             saveWorkbook(wb, outputPath);
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
+
+    public static void exportAllStudents(List<StudentEntity> studentEntityList, Path outputPath){
+        createFinalWorkbook("allStudents", studentEntityList,outputPath);
+    }
+
+    public static void exportStudentsWithMinGrade(List<StudentEntity> studentEntityList, double grade, Path outputPath, StudentService studentService){
+        List<StudentEntity> sortedByMinGrade = studentService.filterStudentsByMinGrade(studentEntityList, grade);
+        createFinalWorkbook("studentsWithMinGradeX", sortedByMinGrade,outputPath);
+    }
+
+
 
 }

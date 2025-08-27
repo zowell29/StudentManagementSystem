@@ -24,6 +24,13 @@ public class StudentService {
                 .toList();
     }
 
+    public List<StudentEntity> filterStudentsByMinGrade(List<StudentEntity> studentEnityList, double minGrade) {
+        logger.debug("Filter students by grade: {}", minGrade);
+        return studentEnityList.stream()
+                .filter(s -> s.getGrade() > minGrade)
+                .toList();
+    }
+
     public List<StudentEntity> sortStudentsByGrade(List<StudentEntity> studentEntityList, String ordering) {
         logger.debug("Filter students by grade");
         if (ordering.equalsIgnoreCase("ascending") || ordering.equalsIgnoreCase("asc")) {
