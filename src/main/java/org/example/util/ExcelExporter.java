@@ -3,18 +3,15 @@ package org.example.util;
 import org.apache.poi.ss.usermodel.*;
 import org.example.model.StudentEntity;
 
-import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.List;
 
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 import java.io.FileOutputStream;
-import java.nio.file.Path;
-import java.time.ZoneId;
-import java.util.Date;
-import java.util.List;
+
 
 /*
 - creează un .xlsx (XSSFWorkbook)
@@ -53,7 +50,11 @@ public class ExcelExporter {
         row.createCell(1).setCellValue(student.getName());
         row.createCell(2).setCellValue(student.getEmail());
         row.createCell(3).setCellValue(student.getAge());
-        row.createCell(4).setCellValue(student.getEnrollment_date()); //todo write as ISO text
+//        row.createCell(4).setCellValue(student.getEnrollment_date());
+        row.createCell(4).setCellValue(
+                student.getEnrollment_date() != null ? student.getEnrollment_date().toString() : ""
+        );//todo write as ISO text
+
         row.createCell(5).setCellValue(student.getGrade());
     }
 
@@ -66,6 +67,9 @@ public class ExcelExporter {
     }
 
     private static void saveWorkbook(Workbook wb, Path outputPath) throws IOException {
+        if (outputPath.getParent() != null) {
+            Files.createDirectories(outputPath.getParent());
+        }
         try (wb; FileOutputStream fos = new FileOutputStream(outputPath.toFile())) {
             wb.write(fos);
         } catch (IOException e) {
