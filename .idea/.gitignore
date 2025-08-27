@@ -3,3 +3,14 @@
 /workspace.xml
 # Environment-dependent path to Maven home directory
 /mavenHomeManager.xml
+/AzureBoardsCloudTokenState.xml
+/ChatGPTConversations_1002.xml
+/ChatGPTConversations_1002.xml
+/compiler.xml
+/encodings.xml
+/EyePillOpenPersistentState_1.xml
+/jarRepositories.xml
+/misc.xml
+/PromptLibrary_13.xml
+/vcs.xml
+/workspace.xml
