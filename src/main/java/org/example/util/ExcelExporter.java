@@ -53,7 +53,7 @@ public class ExcelExporter {
 //        row.createCell(4).setCellValue(student.getEnrollment_date());
         row.createCell(4).setCellValue(
                 student.getEnrollment_date() != null ? student.getEnrollment_date().toString() : ""
-        );//todo write as ISO text
+        );
 
         row.createCell(5).setCellValue(student.getGrade());
     }
