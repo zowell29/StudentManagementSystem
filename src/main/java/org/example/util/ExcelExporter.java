@@ -31,7 +31,7 @@ public class ExcelExporter {
     }
 
     private static Sheet createSheet(Workbook wb, String name) {
-        return wb.createSheet();
+        return wb.createSheet(name);
     }
     private static void writeHeader(Sheet sheet){
         Row header = sheet.createRow(0);
